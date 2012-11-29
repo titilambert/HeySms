@@ -31,7 +31,7 @@ import bsddb
 from time import sleep
 from optparse import OptionParser
 
-from PyQt4 import QtCore, QtGui
+from PySide import QtCore, QtGui
 try:
     import osso
 except:
@@ -101,9 +101,9 @@ class Central_widget(QtGui.QWidget):
         self.friend_list_label.setText(self.tr('Friend list :'))
 
     def reload_contacts(self):
-        self.parent.main_window.setAttribute(
-                                    QtCore.Qt.WA_Maemo5ShowProgressIndicator,
-                                    True)
+#        self.parent.main_window.setAttribute(
+#                                    QtCore.Qt.WA_Maemo5ShowProgressIndicator,
+#                                    True)
         # Read last bonjour_contact used
         last_authorized_bonjour_contact = config.read_last_authorized_bonjour_contact()
 
@@ -132,9 +132,9 @@ class Central_widget(QtGui.QWidget):
 
             banner_notification(self.tr("Bonjour contacts loaded !"))
 
-        self.parent.main_window.setAttribute(
-                                    QtCore.Qt.WA_Maemo5ShowProgressIndicator,
-                                    False)
+#        self.parent.main_window.setAttribute(
+#                                    QtCore.Qt.WA_Maemo5ShowProgressIndicator,
+#                                    False)
 
 
 class Ui_MainWindow(QtCore.QObject):
@@ -346,7 +346,7 @@ def main():
     logger.debug("Scheduler started")
 
     main_window.setWindowTitle("HeySms")
-    main_window.setAttribute(QtCore.Qt.WA_Maemo5AutoOrientation, True)
+#    main_window.setAttribute(QtCore.Qt.WA_Maemo5AutoOrientation, True)
     main_window.app = app
     main_window.show()
     main_window.repaint()

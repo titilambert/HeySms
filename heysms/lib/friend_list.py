@@ -29,7 +29,7 @@ from datetime import datetime
 from time import sleep
 from optparse import OptionParser
 
-from PyQt4 import QtCore, QtGui
+from PySide import QtCore, QtGui
 from friend import Friend
 from lib import logger
 from config import config
@@ -94,7 +94,7 @@ class Favorite_button(QtGui.QPushButton):
 
 class Friend_list_widget(QtGui.QTableWidget):
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtGui.QTableWidget.__init__(self, parent)
         self.parent = parent
         self.setColumnCount(3)
         self.friend_list = []

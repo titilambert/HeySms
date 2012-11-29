@@ -28,16 +28,23 @@ import socket
 from time import sleep
 import bsddb
 import re
-import osso
+try:
+    from eventfeed import EventFeedService, EventFeedItem
+except:
+    pass
+try:
+    import osso
+except:
+    pass
 
 import dbus
 from dbus import DBusException
 from dbus.mainloop.glib import DBusGMainLoop
 import avahi
 
-import pybonjour
+#import pybonjour
 
-from PyQt4 import QtCore
+from PySide import QtCore
 
 
 def search_contact_by_number(phone_number):
@@ -176,32 +183,37 @@ def list_presence_users(regtype='_presence._tcp', nb_try=10):
     try:
         browse_sdRef = pybonjour.DNSServiceBrowse(regtype=regtype,
                                               callBack=browse_callback)
-    except pybonjour.BonjourError,e :
-        if e.errorCode == -65537:
-            banner_notification("Please start Avahi Daemon:\n"
-                                "sudo gainroot --use-su\n"
-                                "/etc/init.d/avahi-daemon start")
-            sleep(4)
-        return names
+    except:
+        pass
+#    except pybonjour.BonjourError,e :
+#        if e.errorCode == -65537:
+#            banner_notification("Please start Avahi Daemon:\n"
+#                                "sudo gainroot --use-su\n"
+#                                "/etc/init.d/avahi-daemon start")
+#            sleep(4)
+#        return names
 
     try:
         try:
-            for i in xrange(nb_try):
-                ready = select.select([browse_sdRef], [], [], timeout)
-                if browse_sdRef in ready[0]:
-                    pybonjour.DNSServiceProcessResult(browse_sdRef)
+#            for i in xrange(nb_try):
+#                ready = select.select([browse_sdRef], [], [], timeout)
+#                if browse_sdRef in ready[0]:
+#                    pybonjour.DNSServiceProcessResult(browse_sdRef)
+            pass
         except KeyboardInterrupt:
             pass
     finally:
-        browse_sdRef.close()
+        pass
+#        browse_sdRef.close()
 
     return names
 
 
 def banner_notification(message):
-    osso_c = osso.Context("heysms_notif", "0.0.1", False)
-    note = osso.SystemNote(osso_c)
-    note.system_note_infoprint(unicode(message).encode("utf8"))
+#    osso_c = osso.Context("heysms_notif", "0.0.1", False)
+#    note = osso.SystemNote(osso_c)
+#    note.system_note_infoprint(unicode(message).encode("utf8"))
+    pass
 
 
 class Log(object):

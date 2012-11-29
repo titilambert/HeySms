@@ -25,7 +25,7 @@
 
 import datetime
 
-from PyQt4 import QtSql
+from PySide import QtSql
 
 db = QtSql.QSqlDatabase("QSQLITE")
 db.setDatabaseName("/home/user/.rtcom-eventlogger/el-v1.db")

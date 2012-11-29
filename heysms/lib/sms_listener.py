@@ -28,7 +28,7 @@ import time
 
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
-from PyQt4 import QtCore
+from PySide import QtCore
 from math import ceil
 
 from lib_sms import deoctify, deoctify_int

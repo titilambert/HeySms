@@ -29,8 +29,8 @@ import asyncore
 import socket
 from xml.sax.saxutils import unescape
 
-from PyQt4 import QtCore
-from PyQt4 import QtNetwork
+from PySide import QtCore
+from PySide import QtNetwork
 
 from BeautifulSoup import BeautifulSoup
 from scheduler import send_sms_q

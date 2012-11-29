@@ -26,7 +26,7 @@
 import Queue
 from time import sleep
 
-from PyQt4 import QtCore
+from PySide import QtCore
 
 from friend import Friend
 from lib import search_contact_by_number, banner_notification

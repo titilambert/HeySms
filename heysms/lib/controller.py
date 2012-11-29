@@ -31,9 +31,9 @@ import subprocess
 import os
 
 import dbus
-from PyQt4 import QtCore, QtNetwork, QtGui
+from PySide import QtCore, QtNetwork, QtGui
 
-import pybonjour
+#import pybonjour
 from friend import Friend
 from lib import logger, search_contacts
 from config import config

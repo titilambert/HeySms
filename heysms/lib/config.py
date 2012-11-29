@@ -27,7 +27,7 @@ import os
 import subprocess
 import time
 
-from PyQt4 import QtCore, QtGui
+from PySide import QtCore, QtGui
 
 from lib import banner_notification
 from lib import logger
@@ -41,36 +41,36 @@ class Config(QtCore.QSettings):
     def __init__(self, parent=None):
         QtCore.QSettings.__init__(self,
                          '/home/' + os.getenv( 'USER' ) + '/.heysms',
-                         0, parent)
+                         "0", parent)
         self.parent = parent
         self.last_authorized_bonjour_contact = self.value("last_authorized_bonjour_contact", '')
         if isinstance(self.last_authorized_bonjour_contact, tuple):
             self.last_authorized_bonjour_contact, _ = self.last_authorized_bonjour_contact
 
         # Compatibility mode
-        self.use_smssend = self.value("use_smssend", QtCore.Qt.Unchecked).toInt()
+        self.use_smssend = self.value("use_smssend", QtCore.Qt.Unchecked)
         ## Useless ... I think ...
         if isinstance(self.use_smssend, tuple):
             self.use_smssend, _ = self.use_smssend
 
         # toggle_profile
-        self.manage_profile = self.value("manage_profile", QtCore.Qt.Unchecked).toInt()
+        self.manage_profile = self.value("manage_profile", QtCore.Qt.Unchecked)
         ## Useless ... I think ...
         if isinstance(self.manage_profile, tuple):
             self.manage_profile, _ = self.manage_profile
 
         # startup_friends
         raw_friends = self.value("startup_friends", [])
-        self.startup_friends = [str(i.toString()) for i in raw_friends.toList()]
+        self.startup_friends = [str(i.toString()) for i in raw_friends]
 
         # start network usb
-        self.useusb = self.value("use_usb", QtCore.Qt.Unchecked).toInt()
+        self.useusb = self.value("use_usb", QtCore.Qt.Unchecked)
         ## Useless ... I think ...
         if isinstance(self.useusb, tuple):
             self.useusb, _ = self.useusb
 
         # start controler
-        self.usecontroler = self.value("use_controller", QtCore.Qt.Unchecked).toInt()
+        self.usecontroler = self.value("use_controller", QtCore.Qt.Unchecked)
         ## Useless ... I think ...
         if isinstance(self.usecontroler, tuple):
             self.usecontroler, _ = self.usecontroler
@@ -80,7 +80,7 @@ class Config(QtCore.QSettings):
         default_lang = os.environ['LANG'].split("_")[0]
         if not default_lang in languages.values():
             default_lang = "en"
-        self.language = self.value("language", default_lang).toString()
+        self.language = self.value("language", default_lang)
         logger.debug("Language: %s" % self.language)
 
     def update_last_authorized_user(self, contact):
@@ -90,7 +90,7 @@ class Config(QtCore.QSettings):
 
     def read_last_authorized_bonjour_contact(self):
         raw_contact = self.value("last_authorized_bonjour_contact")
-        return str(raw_contact.toString())
+        return str(raw_contact)
 
     def del_startup_contacts(self, friend):
         self.startup_friends.remove(friend.number)
@@ -320,7 +320,7 @@ class Config(QtCore.QSettings):
         if lang:
             self.language = lang
 
-        self.setValue("language", QtCore.QVariant(self.language))
+        self.setValue("language", self.language)
         self.sync()
         translator = self.parent.translator
         if translator:
@@ -341,19 +341,19 @@ class Config_dialog(QtGui.QDialog):
         self.config = config
         self.silent_label = QtGui.QLabel(self.tr('Switch in Silent mode when HeySms starts'))
         self.silent_checkbox = QtGui.QCheckBox(self)
-        self.silent_checkbox.setCheckState(config.manage_profile)
+#        self.silent_checkbox.setCheckState(config.manage_profile)
         self.silent_checkbox.setFixedWidth(70)
         self.use_smssend_label = QtGui.QLabel(self.tr('Use Smssend to send Sms'))
         self.smssend_checkbox = QtGui.QCheckBox(self)
-        self.smssend_checkbox.setCheckState(config.use_smssend)
+#        self.smssend_checkbox.setCheckState(config.use_smssend)
         self.smssend_checkbox.setFixedWidth(70)
         self.useusb_label = QtGui.QLabel(self.tr('Activate USB networking'))
         self.useusb_checkbox = QtGui.QCheckBox(self)
-        self.useusb_checkbox.setCheckState(config.useusb)
+#        self.useusb_checkbox.setCheckState(config.useusb)
         self.useusb_checkbox.setFixedWidth(70)
         self.usecontroller_label = QtGui.QLabel(self.tr('Active Controller contact'))
         self.usecontroller_checkbox = QtGui.QCheckBox(self)
-        self.usecontroller_checkbox.setCheckState(config.usecontroler)
+#        self.usecontroller_checkbox.setCheckState(config.usecontroler)
         self.usecontroller_checkbox.setFixedWidth(70)
         self.language_label = QtGui.QLabel(self.tr('Language'))
         self.language_combobox = QtGui.QComboBox(self)
