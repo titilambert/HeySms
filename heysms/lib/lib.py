@@ -42,7 +42,7 @@ from dbus import DBusException
 from dbus.mainloop.glib import DBusGMainLoop
 import avahi
 
-#import pybonjour
+import pybonjour
 
 from PySide import QtCore
 
@@ -185,26 +185,26 @@ def list_presence_users(regtype='_presence._tcp', nb_try=10):
                                               callBack=browse_callback)
     except:
         pass
-#    except pybonjour.BonjourError,e :
-#        if e.errorCode == -65537:
-#            banner_notification("Please start Avahi Daemon:\n"
-#                                "sudo gainroot --use-su\n"
-#                                "/etc/init.d/avahi-daemon start")
-#            sleep(4)
-#        return names
+    except pybonjour.BonjourError,e :
+        if e.errorCode == -65537:
+            banner_notification("Please start Avahi Daemon:\n"
+                                "sudo gainroot --use-su\n"
+                                "/etc/init.d/avahi-daemon start")
+            sleep(4)
+        return names
 
     try:
         try:
-#            for i in xrange(nb_try):
-#                ready = select.select([browse_sdRef], [], [], timeout)
-#                if browse_sdRef in ready[0]:
-#                    pybonjour.DNSServiceProcessResult(browse_sdRef)
+            for i in xrange(nb_try):
+                ready = select.select([browse_sdRef], [], [], timeout)
+                if browse_sdRef in ready[0]:
+                   pybonjour.DNSServiceProcessResult(browse_sdRef)
             pass
         except KeyboardInterrupt:
             pass
     finally:
         pass
-#        browse_sdRef.close()
+        browse_sdRef.close()
 
     return names
 

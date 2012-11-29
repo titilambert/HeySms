@@ -32,7 +32,7 @@ import subprocess
 import dbus
 from PySide import QtCore, QtNetwork, QtGui
 
-#import pybonjour
+import pybonjour
 from lib_sms import createPDUmessage
 from lib import logger
 from config import config
