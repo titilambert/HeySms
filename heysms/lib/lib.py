@@ -183,8 +183,6 @@ def list_presence_users(regtype='_presence._tcp', nb_try=10):
     try:
         browse_sdRef = pybonjour.DNSServiceBrowse(regtype=regtype,
                                               callBack=browse_callback)
-    except:
-        pass
     except pybonjour.BonjourError,e :
         if e.errorCode == -65537:
             banner_notification("Please start Avahi Daemon:\n"
